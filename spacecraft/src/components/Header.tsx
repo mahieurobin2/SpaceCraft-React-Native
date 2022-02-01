@@ -15,7 +15,8 @@ const Header = (props) => {
 const styles = StyleSheet.create({
   container: {
     padding: 24,
-  }
+  },
+  
   header: {
     fontSize: 15,
     lineHeight: 21,

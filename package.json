@@ -1,5 +1,25 @@
 {
   "dependencies": {
-    "react-native-paper": "^4.11.2"
+    "@react-navigation/native": "^6.0.7",
+    "@react-navigation/native-stack": "^6.3.0",
+    "react-native-offline": "^6.0.0",
+    "react-native-paper": "^4.11.2",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.10.2",
+    "react-refetch": "^3.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@storybook/addon-actions": "^5.3",
+    "@storybook/addon-knobs": "^5.3",
+    "@storybook/addon-links": "^5.3",
+    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-knobs": "^5.3.25",
+    "@storybook/react-native": "^5.3.25",
+    "@types/whatwg-fetch": "0.0.33",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-root-import": "^6.6.0",
+    "eslint-config-react-native-wcandillon": "^3.7.2"
   }
 }
