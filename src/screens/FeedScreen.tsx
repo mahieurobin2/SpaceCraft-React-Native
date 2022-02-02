@@ -1,12 +1,12 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import { Button } from "react-native-paper";
 
 import ScreenContainer from "../components/ScreenContainer";
-import StarshipCard from "../components/StarshipCard";
+import { StarshipCard } from "../components/StarshipCard";
 
-import { fetchStarships } from "../hooks/UseStarships";
+import { UseStarships } from "../hooks/UseStarships";
 
 interface ShipProps {
   name: string;
@@ -22,14 +22,15 @@ interface RenderItemProps {
 const renderItem = (props: RenderItemProps) => {
   const ship = props.item;
 
-  return <StarshipCard ship={ship} />;
+  return(
+    <View>
+    <StarshipCard name={""} model={""} manufacturer={""} cost_in_credits={""} />
+  </View>
+)
 };
 
-export const StarshipFeedScreen = () => {
-  const { isLoading, isError, data, refetch } = useQuery(
-    "starships",
-    fetchStarships
-  );
+export const FeedScreen = () => {
+  const { isLoading, isError, data, refetch } = useQuery("starships");
 
   if (isLoading) {
     return <ScreenContainer title="Loading…" />;
@@ -44,6 +45,7 @@ export const StarshipFeedScreen = () => {
       </ScreenContainer>
     );
   }
+console.log(data);
 
   if (data.results === undefined) {
     return <ScreenContainer title="Not Found" />;
@@ -58,3 +60,11 @@ export const StarshipFeedScreen = () => {
       />
     </ScreenContainer>
   );
+};
+
+function fetchStarships(
+  arg0: string,
+  fetchStarships: any
+): { isLoading: any; isError: any; data: any; refetch: any } {
+  throw new Error("Function not implemented.");
+}

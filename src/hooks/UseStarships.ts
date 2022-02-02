@@ -6,7 +6,7 @@ async function fetchData() {
   return json;
 }
 
-export function useStarships() {
+export function UseStarships() {
   return useQuery(["starships"], fetchData);
   
 }
