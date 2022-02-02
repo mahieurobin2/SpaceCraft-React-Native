@@ -6,7 +6,7 @@ import { Button } from "react-native-paper";
 import ScreenContainer from "../components/ScreenContainer";
 import StarshipCard from "../components/StarshipCard";
 
-import { fetchStarships } from "~/hooks/UseStarships";
+import { fetchStarships } from "../hooks/UseStarships";
 
 interface ShipProps {
   name: string;
