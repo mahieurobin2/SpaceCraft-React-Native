@@ -1,7 +1,7 @@
 import { Routes } from "./Routes";
 import { Colors } from "react-native-paper";
 import React from "react";
-import FeedScreen from "../Screens/FeedScreen";
+import FeedScreen from "../screens/FeedScreen";
 import TermsScreen from "../screens/TermsScreen";
 
 const Tab = createMaterialBottomTabNavigator();
