@@ -1,8 +1,9 @@
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
+import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Colors, Headline } from "react-native-paper";
 
-// Import <Offline /> component
+import { Offline } from "~/components/Offline";
 
 interface ScreenContainerProps {
   title: string;
@@ -10,23 +11,23 @@ interface ScreenContainerProps {
   withFooter?: boolean;
 }
 
-const ScreenContainer = ({
+export const ScreenContainer = ({
   title,
   children,
   withFooter = false,
 }: ScreenContainerProps) => {
   return (
     <ScrollView style={styles.container} nestedScrollEnabled={true}>
-      {/* <Offline /> */}
       <Headline style={styles.headerText}>{title}</Headline>
 
       {children}
+
+      <Offline />
+
       {withFooter && <View style={styles.footer} />}
     </ScrollView>
   );
 };
-
-export default ScreenContainer;
 
 const styles = StyleSheet.create({
   container: {

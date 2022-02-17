@@ -1,21 +1,18 @@
 import React from "react";
 import { View, Text, Image, ScrollView } from "react-native";
-import { Appbar, Title } from "react-native-paper";
+import { Appbar, Colors, Title } from "react-native-paper";
 
-const TermsScreen = () => {
+export function TermsScreen({ navigation }) {
   function goBack() {
-    // We need to use the screen props `{navigation}` to navigate back
-    // it will be introduced in the next lesson `react-navigation`
-    alert("goBack pressed!");
+    navigation.goBack();
   }
 
   return (
-    <View>
-      <Appbar.Header>
+    <ScrollView>
+      <Appbar.Header style={{ backgroundColor: Colors.purple500 }}>
         <Appbar.BackAction onPress={goBack} />
         <Appbar.Content title="Terms and Conditions" />
       </Appbar.Header>
-      <ScrollView>
       <View style={{ padding: 32 }}>
         <Text>
           This Terms of Service, including all supplemental terms as amended
@@ -104,9 +101,6 @@ const TermsScreen = () => {
 
         <Text style={{ marginBottom: 128 }}>May the force be with you</Text>
       </View>
-      </ScrollView>
-    </View>
+    </ScrollView>
   );
-};
-
-export default TermsScreen;
+}

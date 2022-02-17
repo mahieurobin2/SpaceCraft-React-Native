@@ -1,29 +1,31 @@
+import { View, StyleSheet } from "react-native";
 import React from "react";
-import { View } from "react-native";
-import { Text } from "react-native-paper";
+import { Colors, Headline } from "react-native-paper";
+import Constants from "expo-constants";
 
-const Header = (props) => {
+type HeaderProps = {
+  title: string;
+};
+
+export const Header = ({ title }: HeaderProps) => {
   return (
-    <View style={styles.container}>
-      <Text
-        style={styles.header}
-        {...props}
-      />
+    <View style={styles.header}>
+      <Headline style={styles.headerText}>{title}</Headline>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 24,
-  },
-  
   header: {
-    fontSize: 15,
-    lineHeight: 21,
-    textAlign: "center",
-    marginBottom: 12,
+    paddingTop: Constants.statusBarHeight,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 256,
+    backgroundColor: Colors.purple500,
+  },
+  headerText: {
+    color: Colors.white,
+    fontWeight: "bold",
+    textTransform: "uppercase",
   },
 });
-
-export default Header;

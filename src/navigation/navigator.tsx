@@ -1,27 +1,26 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "../screens/LoginScreen";
-import { Routes } from "./Routes";
-import { FeedScreen } from "../screens/FeedScreen";
 
-const screenOptions = { headerShown: false };
-type Props = {};
+import { useAuthentication } from "../context/Authentication";
 
-const Stack = createNativeStackNavigator();
-const Navigator = (props: Props) => {
+import { BottomTabNavigator } from "./BottomTabNavigator";
+import { AuthNavigator } from "./AuthNavigator";
+
+const Stack = createStackNavigator();
+
+export const Navigator = () => {
+  const { user } = useAuthentication();
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen
-          name={Routes.STARSHIP_FEED_SCREEN}
-          component={FeedScreen}
-        />
-        <Stack.Screen name={Routes.LOGIN_SCREEN} component={LoginScreen} />
+        {user ? (
+          <Stack.Screen name={"BOTTOM_TABS"} component={BottomTabNavigator} />
+        ) : (
+          <Stack.Screen name={"AUTH_STACK"} component={AuthNavigator} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
-export default Navigator;

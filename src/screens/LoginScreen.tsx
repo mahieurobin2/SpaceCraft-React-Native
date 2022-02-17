@@ -1,49 +1,83 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Headline, TextInput } from 'react-native-paper';
-import * as React from 'react';
-import { Button } from 'react-native-paper';
-import { redA700 } from 'react-native-paper/lib/typescript/styles/colors';
+import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { Button, Colors, TextInput } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
+import { FormInput } from "../components/FromInput";
+import { Routes } from "../navigation/Routes";
+import { useAuthentication } from "../context/Authentication";
 
-export default function LogginScreen() {
-  const [text, setText] = React.useState("");
-  const [password, setPassword] = React.useState("");
+import { Header } from "~/components/Header";
+
+export const LoginScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isVisble, setIsVisible] = useState(true);
+
+  const navigation = useNavigation();
+  const { setUser } = useAuthentication();
+  function handleLogin() {
+    setUser(true);
+  }
+
+  function navigateToTerms() {
+    navigation.navigate(Routes.TERMS_SCREEN);
+  }
+
+  function toggleSecureIcon() {
+    setIsVisible(!isVisble);
+  }
+
   return (
-    // using <> is just like using <React.Fragment>
-    <>
-    <View style={styles.container}>
-      <View style={styles.header}>   
-         <Headline style={styles.headline}>Welcome to SpaceCraft</Headline>
+    <View>
+      <Header title="SpaceCraft" />
+      <View style={styles.content}>
+        <FormInput
+          label="Email"
+          value={email}
+          onChangeText={(value) => setEmail(value)}
+        />
+        <FormInput
+          label="Password"
+          value={password}
+          secureTextEntry={isVisble}
+          onChangeText={(value) => setPassword(value)}
+          right={
+            <TextInput.Icon
+              onPress={toggleSecureIcon}
+              name={isVisble ? "eye-off" : "eye"}
+            />
+          }
+        />
+        <Button
+          onPress={handleLogin}
+          style={styles.submitButton}
+          mode="contained"
+        >
+          Login
+        </Button>
+        <TouchableOpacity onPress={navigateToTerms}>
+          <Text style={styles.tocText}>
+            by login you accept the Terms and Conditions.
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
-      <TextInput
-       label="Email"
-        value={text}
-        onChangeText={text => setText(text)}
-      />
-      <TextInput
-       label="Password"
-        value={password}
-        onChangeText={password => setPassword(password)}
-      />
-  <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
-    Login
-  </Button> 
-    </View>
-</>
-// using </> is just like using </React.Fragment>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  header:{
-    height:200,
-    backgroundColor: "purple",
-    justifyContent:'center',
-    alignItems:'center',
+  content: {
+    padding: 16,
   },
-
-  headline: {
-    color:"white",
-  }
+  submitButton: {
+    marginVertical: 32,
+    marginHorizontal: 16,
+    backgroundColor: Colors.purple500,
+  },
+  tocText: {
+    textAlign: "center",
+    fontSize: 14,
+    color: Colors.grey500,
+  },
 });
